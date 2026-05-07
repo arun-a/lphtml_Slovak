@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Subscription - 1 Click Flow</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+    <main class="wrap" id="app">
+        <!-- LOADING SCREEN -->
+        <section id="he-loading" class="card loading-screen active" aria-live="polite">
+            <div class="loader-content">
+                <div class="spinner-circle"></div>
+                <h1 class="loading-text">Loading...</h1>
+            </div>
+        </section>
+
+        <!-- MAIN CARD -->
+        <section class="card subscription-card" id="wholecard" role="region" aria-labelledby="service-title">
+            <!-- SONIX LOGO (Top Right) -->
+            <!-- <div class="sonix-logo-badge">
+                <img src="assets/images/sonix-logo.png" alt="Sonix Games" class="sonix-logo" />
+            </div> -->
+
+            <!-- HEADER SECTION -->
+            <header class="card-header">
+                <div class="header-gradient"></div>
+                <img src="assets/images/banner.png" alt="Service Banner" class="top_picture" />
+                <div class="header-content">
+                    <h1 id="service-title" class="service-title">UŽITE SI NEOBMEDZENÝ PRÍSTUP K HRÁM BEZ REKLÁM</h1>
+                    <p class="service-subtitle">Získajte prístup k prémiovému obsahu bez reklám alebo v nákupoch aplikácií</p>
+                </div>
+            </header>
+
+            <!-- PROGRESS INDICATOR -->
+            <div class="progress-wrapper">
+                <div class="progress-steps">
+                    <div class="progress-step active" id="step-1">
+                        <span class="step-number">1</span>
+                        <span class="step-label">CTA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT SECTION -->
+            <div class="content">
+                <!-- GLOBAL MESSAGE -->
+                <div id="global-message" class="global-message" role="alert"></div>
+
+                <!-- DIRECT SMS SECTION -->
+                <div id="direct-sms-section" class="form-section active">
+                    <h2><strong>UŽITE SI NEOBMEDZENÝ PRÍSTUP K HRÁM BEZ REKLÁM</strong></h2>
+                    <h3>Kliknite pre prístup k Sonix Games</h3>
+                    <div class="form-actions">
+                        <button id="submit-popup" class="btn btn-primary">
+                            <span>POKRAČOVAŤ</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FOOTER INFO -->
+                <div class="footer-section">
+                    <p class="terms-text">
+                        Súhlasím s budúcimi inkasnými platbami v prospech uvedeného poskytovateľa služby bez nutnosti autorizácie každej mojej platby a to navýšením faktúry/stiahnutím kreditu u mobilného operátora za týchto podmienok.
+                    </p>
+                    <div class="link-container">
+                        <a href="https://www.o2.sk/podpora/centrum-podpory/ako-nakupovat/podmienkysluzby-nakupy-vaplikacnych-obchodoch" class="footer-link" target="_blank">"Nákupy v aplikačných obchodoch" | O2</a>
+                        <span class="link-separator">•</span>
+                        <a href="mailto:support@dot-jo.com" class="footer-link">Podpora: support@dot-jo.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/script/main.js"></script>
+</body>
+</html>
