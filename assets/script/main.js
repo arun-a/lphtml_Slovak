@@ -12,6 +12,7 @@ const submitMsisdnBtn = document.getElementById("submit-msisdn");
 const submitPinBtn = document.getElementById("submit-pin");
 const pinBackBtn = document.getElementById("pin-back-btn");
 const submitPopupBtn = document.getElementById("submit-popup");
+const firstCtaBtn = document.getElementById("first-cta-btn");
 const openSmsBtn = document.getElementById("btn-open-sms");
 
 const msisdnSection = document.getElementById("msisdn-section");
@@ -126,6 +127,11 @@ function setupEventListeners() {
         submitPopupBtn.addEventListener("click", handleDirectSmsSubmit);
     }
 
+    // First CTA Button
+    if (firstCtaBtn) {
+        firstCtaBtn.addEventListener("click", handleFirstCtaSubmit);
+    }
+
     // Open SMS Button (Thank You)
     if (openSmsBtn) {
         openSmsBtn.addEventListener("click", handleOpenSms);
@@ -135,6 +141,14 @@ function setupEventListeners() {
 /* MSISDN SUBMIT HANDLER */
 function handleMsisdnSubmit(e) {
     e.preventDefault();
+
+    // Add click animation effect
+    addButtonClickEffect(submitMsisdnBtn);
+    
+    // Trigger vibration if available
+    if (navigator.vibrate) {
+        navigator.vibrate([50, 30, 50]);
+    }
 
     if (!msisdnInput.value) {
         showMsisdnError("Please enter a mobile number");
@@ -230,7 +244,63 @@ function transitionToThankYou() {
 /* DIRECT SMS SUBMIT HANDLER */
 function handleDirectSmsSubmit(e) {
     e.preventDefault();
+    
+    // Add click animation effect
+    addButtonClickEffect(submitPopupBtn);
+    
+    // Trigger vibration if available
+    if (navigator.vibrate) {
+        navigator.vibrate([50, 30, 50]);
+    }
+    
     triggerSmsSubmit();
+}
+
+/* FIRST CTA SUBMIT HANDLER */
+function handleFirstCtaSubmit(e) {
+    e.preventDefault();
+    
+    // Add click animation effect
+    addButtonClickEffect(firstCtaBtn);
+    
+    // Trigger vibration if available
+    if (navigator.vibrate) {
+        navigator.vibrate([50, 30, 50]);
+    }
+    
+    // Transition to next step (assuming it goes to MSISDN section)
+    transitionToMsisdnFromCta();
+}
+
+/* TRANSITION FROM FIRST CTA TO MSISDN */
+function transitionToMsisdnFromCta() {
+    const firstCtaSection = document.getElementById("first-cta-section");
+    
+    // Hide first CTA section
+    if (firstCtaSection) {
+        firstCtaSection.classList.remove("active");
+        setTimeout(() => {
+            firstCtaSection.style.display = "none";
+            // Show MSISDN section
+            if (msisdnSection) {
+                msisdnSection.style.display = "block";
+                msisdnSection.classList.add("active");
+                if (msisdnInput) msisdnInput.focus();
+            }
+        }, 300);
+    }
+}
+
+/* BUTTON CLICK ANIMATION EFFECT */
+function addButtonClickEffect(button) {
+    button.style.animation = 'none';
+    setTimeout(() => {
+        button.style.animation = 'vibration 0.3s ease-in-out';
+    }, 10);
+    
+    setTimeout(() => {
+        button.style.animation = '';
+    }, 350);
 }
 
 /* SMS SUBMIT HANDLER */
