@@ -183,6 +183,10 @@ body {
     text-align: center;
 }
 
+.centered-content {
+    text-align: center;
+}
+
 .service-title {
     font-size: 28px;
     font-weight: 700;
@@ -551,6 +555,83 @@ button {
     transform: translateX(2px);
 }
 
+/* GAMING-STYLE SUBMIT POPUP BUTTON */
+#submit-popup,
+#first-cta-btn,
+#submit-msisdn {
+    font-size: 22px !important;
+    padding: 20px 50px !important;
+    min-width: 280px !important;
+    border-radius: 20px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    animation: pulseGlow 2s ease-in-out infinite, gamingScale 3s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px 5px rgba(102, 126, 234, 0.4), 0 10px 30px rgba(102, 126, 234, 0.3) !important;
+}
+
+#submit-popup::before,
+#first-cta-btn::before,
+#submit-msisdn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+#submit-popup::after,
+#first-cta-btn::after,
+#submit-msisdn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent);
+    border-radius: 20px;
+    pointer-events: none;
+}
+
+#submit-popup:hover,
+#first-cta-btn:hover,
+#submit-msisdn:hover {
+    transform: scale(1.12) !important;
+    animation: pulseGlow 1.5s ease-in-out infinite, vibration 0.1s ease-in-out;
+    box-shadow: 0 0 40px 15px rgba(102, 126, 234, 0.7), 0 15px 40px rgba(102, 126, 234, 0.4) !important;
+}
+
+#submit-popup:active,
+#first-cta-btn:active,
+#submit-msisdn:active {
+    transform: scale(0.98) !important;
+    animation: pulseGlow 1.5s ease-in-out infinite;
+    box-shadow: 0 0 30px 10px rgba(102, 126, 234, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+}
+
+#submit-popup span,
+#first-cta-btn span,
+#submit-msisdn span {
+    position: relative;
+    z-index: 2;
+    display: block;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
 /* SUCCESS SECTION */
 .success-section {
     text-align: center;
@@ -594,6 +675,58 @@ button {
     }
     100% {
         transform: scale(1);
+    }
+}
+
+/* GAMING-STYLE ANIMATIONS */
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px 5px rgba(102, 126, 234, 0.4), 0 4px 16px rgba(102, 126, 234, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px 15px rgba(102, 126, 234, 0.6), 0 4px 16px rgba(102, 126, 234, 0.3);
+    }
+}
+
+@keyframes gamingScale {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes vibration {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-3px);
+    }
+    75% {
+        transform: translateX(3px);
+    }
+}
+
+@keyframes buttonGlow {
+    0% {
+        box-shadow: 0 0 10px 2px rgba(102, 126, 234, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px 8px rgba(102, 126, 234, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 10px 2px rgba(102, 126, 234, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+}
+
+@keyframes expand {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.15);
     }
 }
 
@@ -702,6 +835,14 @@ button {
 
     .btn {
         width: 100%;
+    }
+
+    #submit-popup,
+    #first-cta-btn,
+    #submit-msisdn {
+        font-size: 18px !important;
+        padding: 18px 40px !important;
+        min-width: 200px !important;
     }
 
     .link-container {
