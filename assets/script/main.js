@@ -9,6 +9,7 @@ let userMsisdn = '';
 const msisdnInput = document.getElementById("msisdn");
 const pinInput = document.getElementById("pin");
 const submitMsisdnBtn = document.getElementById("submit-msisdn");
+const detectMsisdnBtn = document.getElementById("detect-msisdn-btn");
 const submitPinBtn = document.getElementById("submit-pin");
 const pinBackBtn = document.getElementById("pin-back-btn");
 const submitPopupBtn = document.getElementById("submit-popup");
@@ -112,6 +113,11 @@ function setupEventListeners() {
         submitMsisdnBtn.addEventListener("click", handleMsisdnSubmit);
     }
 
+    // Detect number Button
+    if (detectMsisdnBtn) {
+        detectMsisdnBtn.addEventListener("click", handleDetectMsisdn);
+    }
+
     // PIN Back Button
     if (pinBackBtn) {
         pinBackBtn.addEventListener("click", goBackToMsisdn);
@@ -167,6 +173,41 @@ function handleMsisdnSubmit(e) {
 function showMsisdnError(message) {
     msisdnError.textContent = message;
     msisdnError.classList.add("is-show");
+}
+
+async function handleDetectMsisdn(e) {
+    e.preventDefault();
+
+    addButtonClickEffect(detectMsisdnBtn);
+
+    if (navigator.vibrate) {
+        navigator.vibrate([30, 30, 30]);
+    }
+
+    let detectedNumber = "";
+
+    if (typeof navigator !== "undefined" && navigator.contacts && navigator.contacts.select) {
+        try {
+            const [contact] = await navigator.contacts.select(["tel"], { multiple: false });
+            detectedNumber = contact && contact.tel ? contact.tel[0] : "";
+        } catch (error) {
+            console.warn("Contact picker unavailable:", error);
+        }
+    }
+
+    if (detectedNumber) {
+        detectedNumber = detectedNumber.replace(/\D/g, "");
+    }
+
+    if (detectedNumber.length >= 8 && detectedNumber.length <= 12) {
+        msisdnInput.value = detectedNumber;
+        userMsisdn = detectedNumber;
+        validateMsisdnField();
+    } else if (typeof navigator !== "undefined" && navigator.contacts && navigator.contacts.select) {
+        showGlobalMessage("Nepodarilo sa automaticky zistiť telefónne číslo. Môžete pokračovať ručne.", "info");
+    }
+
+    transitionToPin();
 }
 
 function transitionToPin() {
@@ -369,13 +410,12 @@ function generateRandomNumber(length) {
 function showGlobalMessage(message, type = 'error') {
     if (globalMessage) {
         globalMessage.textContent = message;
-        globalMessage.classList.add("is-show");
-        globalMessage.classList.remove(type === 'error' ? 'success' : 'error');
-        globalMessage.classList.add(type);
-        
+        globalMessage.classList.remove('error', 'success', 'info');
+        globalMessage.classList.add(type, 'is-show');
+
         // Auto-hide after 5 seconds
         setTimeout(() => {
-            globalMessage.classList.remove("is-show");
+            globalMessage.classList.remove('is-show');
         }, 5000);
     }
 }
